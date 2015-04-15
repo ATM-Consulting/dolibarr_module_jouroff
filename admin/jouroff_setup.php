@@ -143,7 +143,7 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
         )
         ,'link'=>array(
             'date_jourOff'=>'<a href="?idJour=@ID@&fk_user='.$user->id.'&action=view">@val@</a>'
-            ,'Supprimer'=>$user->rights->absence->myactions->ajoutJourOff?"<a onclick=\"if (window.confirm('" . $langs->trans('DoYouReallyWantDeletePublicHoliday') . "')){href='?idJour=@ID@&fk_user=".$user->id."&action=delete'};\"><img src='./img/delete.png'></a>":''
+            ,'Supprimer'=>$user->rights->jouroff->myactions->ajoutJourOff?"<a onclick=\"if (window.confirm('" . $langs->trans('DoYouReallyWantDeletePublicHoliday') . "')){href='?idJour=@ID@&fk_user=".$user->id."&action=delete'};\">".img_delete()."</a>":''
         ) 
         ,'translate'=>array(
             'Période'=>array('matin'=> $langs->trans('AbsenceMorning'),'apresmidi'=> $langs->trans('AbsenceAfternoon'),'allday'=> $langs->trans('AbsenceAllDay'))
@@ -159,7 +159,7 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
             ,'messageNothing'=>"Aucun jour non travaillé"
             ,'order_down'=>img_picto('','1downarrow.png', '', 0)
             ,'order_up'=>img_picto('','1uparrow.png', '', 0)
-            ,'picto_search'=>'<img src="../../theme/rh/img/search.png">'
+            ,'picto_search'=>img_search()
             
         )//theme/rh/img/search.png
         ,'title'=>array(
@@ -172,12 +172,14 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
         ,'orderBy'=>$TOrder
         
     ));
-    if($user->rights->absence->myactions->ajoutJourOff=="1"){
+    if($user->rights->jouroff->myactions->ajoutJourOff=="1"){
         ?>
+        <div class="tabsAction">
         <a class="butAction" href="?fk_user=<?=$user->id?>&action=new"><?php echo $langs->trans('New'); ?></a>
         &nbsp;
         <a class="butAction" href="?action=sync"><?php echo $langs->trans('OnlineSynchronization'); ?></a>
         <div style="clear:both"></div>
+        </div>
         <?php
     }
     $form->end();
@@ -197,7 +199,7 @@ function _fiche(&$PDOdb, $feries, $emploiTemps, $mode) {
 
     
     $TBS=new TTemplateTBS();
-    print $TBS->render('./tpl/joursferies.tpl.php'
+    print $TBS->render('../tpl/joursferies.tpl.php'
         ,array(
             
         )
@@ -213,7 +215,7 @@ function _fiche(&$PDOdb, $feries, $emploiTemps, $mode) {
             )
             ,'userCourant'=>array(
                 'id'=>$user->id
-                ,'droitAjoutJour'=>$user->rights->absence->myactions->ajoutJourOff
+                ,'droitAjoutJour'=>$user->rights->jouroff->myactions->ajoutJourOff
             )
             ,'view'=>array(
                 'mode'=>$mode

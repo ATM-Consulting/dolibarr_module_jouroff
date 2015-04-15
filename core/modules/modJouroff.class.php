@@ -172,7 +172,12 @@ class modJouroff extends DolibarrModules
 		// Permissions
 		$this->rights = array();		// Permission array used by this module
 		$r=0;
-
+        $this->rights[$r][0] = $this->numero+$r;
+        $this->rights[$r][1] = $langs->trans('AddRemoveNoWorkingDays');
+        $this->rights[$r][3] = 0;
+        $this->rights[$r][4] = 'myactions';
+        $this->rights[$r][5] = 'ajoutJourOff';
+        $r++;
 		// Add here list of permission defined by an id, a label, a boolean and two constant strings.
 		// Example:
 		// $this->rights[$r][0] = $this->numero + $r;	// Permission id (must not be already used)

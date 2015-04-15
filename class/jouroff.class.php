@@ -80,7 +80,7 @@ class TRH_JoursFeries extends TObjetStd {
         foreach($iCal->cal['VEVENT'] as $event) {
         
             if($event['STATUS']=='CONFIRMED') {
-                
+                var_dump($event);
                 $jf = new TRH_JoursFeries;
                 $jf->commentaire = $event['SUMMARY'];
                 
