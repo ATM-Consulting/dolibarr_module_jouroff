@@ -159,7 +159,7 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
             ,'messageNothing'=>"Aucun jour non travaillé"
             ,'order_down'=>img_picto('','1downarrow.png', '', 0)
             ,'order_up'=>img_picto('','1uparrow.png', '', 0)
-            ,'picto_search'=>img_search()
+            /*,'picto_search'=>img_search()*/
             
         )//theme/rh/img/search.png
         ,'title'=>array(
