@@ -2,13 +2,21 @@
 /*
  * Script créant et vérifiant que les champs requis s'ajoutent bien
  */
-define('INC_FROM_CRON_SCRIPT', true);
 
-require('../config.php');
-require('../class/xxx.class.php');
+if(!defined('INC_FROM_DOLIBARR')) {
+    define('INC_FROM_CRON_SCRIPT', true);
+    require('../config.php');
+    $ATMdb=new TPDOdb;
+    $ATMdb->debug=true;
+}
+else{
+    $ATMdb=new TPDOdb;
+    
+}
 
-$PDOdb=new TPDOdb;
-$PDOdb->db->debug=true;
+global $db;
 
-$o=new TXXX($db);
-$o->init_db_by_vars($PDOdb);
+dol_include_once('/jouroff/class/jouroff.class.php');
+
+$o=new TRH_JoursFeries($db);
+$o->init_db_by_vars($ATMdb);

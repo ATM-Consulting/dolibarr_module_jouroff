@@ -10,3 +10,7 @@ AbsenceAfternoon=Après-midi
 AbsenceAllDay=Toute la journée
 AbsenceMorning=Matin
 AddRemoveNoWorkingDays=Ajouter/Supprimer des jours non travaillés
+
+OnlineSynchronization = Synchronistaion en ligne
+PublicHolidayNonWorkedDaysList = Liste des jours non travaillés
+NoWorkedDays = Jours non travaillés

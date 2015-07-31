@@ -256,6 +256,10 @@ class modJouroff extends DolibarrModules
 		$sql = array();
 
 		$result=$this->_load_tables('/jouroff/sql/');
+		
+		define('INC_FROM_DOLIBARR',true);
+		dol_include_once("/jouroff/config.php");
+		dol_include_once("/jouroff/script/create-maj-base.php");
 
 		return $this->_init($sql, $options);
 	}
