@@ -14,3 +14,4 @@ AddRemoveNoWorkingDays=Ajouter/Supprimer des jours non travaillés
 OnlineSynchronization = Synchronistaion en ligne
 PublicHolidayNonWorkedDaysList = Liste des jours non travaillés
 NoWorkedDays = Jours non travaillés
+DoYouReallyWantDeletePublicHoliday = Etes vous sûr de vouloir supprimer cette ligne ?
