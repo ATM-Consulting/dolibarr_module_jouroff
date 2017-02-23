@@ -92,7 +92,8 @@ class TRH_JoursFeries extends TObjetStd {
 		$TListDays[strtoupper(trim("Jour de l'an"))] = true;
         
         foreach($iCal->cal['VEVENT'] as $event) {
-            if($event['STATUS']=='CONFIRMED' && $TListDays[strtoupper(trim($event['SUMMARY']))]) {
+        	$label = strtoupper(trim($event['SUMMARY']));
+            if($event['STATUS']=='CONFIRMED' && !empty($TListDays[$label])) {
                 //var_dump($event);
                 $jf = new TRH_JoursFeries;
                 $jf->commentaire = $event['SUMMARY'];
