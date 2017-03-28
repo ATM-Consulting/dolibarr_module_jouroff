@@ -6,11 +6,11 @@
 if(!defined('INC_FROM_DOLIBARR')) {
     define('INC_FROM_CRON_SCRIPT', true);
     require('../config.php');
-    $ATMdb=new TPDOdb;
-    $ATMdb->debug=true;
+    $PDOdb=new TPDOdb;
+    $PDOdb->debug=true;
 }
 else{
-    $ATMdb=new TPDOdb;
+    $PDOdb=new TPDOdb;
     
 }
 
@@ -19,4 +19,4 @@ global $db;
 dol_include_once('/jouroff/class/jouroff.class.php');
 
 $o=new TRH_JoursFeries($db);
-$o->init_db_by_vars($ATMdb);
+$o->init_db_by_vars($PDOdb);
