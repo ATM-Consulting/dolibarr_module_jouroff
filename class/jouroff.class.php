@@ -21,7 +21,7 @@ class TRH_JoursFeries extends TObjetStd {
             'apresmidi'=> $langs->trans('AbsenceAfternoon')
         );
         
-        $this->moment = 'allday';       
+        $this->moment = 'allday';
     }
     
     
@@ -82,10 +82,24 @@ class TRH_JoursFeries extends TObjetStd {
     static function syncronizeFromURL(&$ATMdb, $url) {
         
         $iCal = new ICalReader( $url );
+		
+		$TListDays[strtoupper(trim("Noël"))] = true;
+		$TListDays[strtoupper(trim("L'Armistice"))] = true;
+		$TListDays[strtoupper(trim("La Toussaint"))] = true;
+		$TListDays[strtoupper(trim("L'Assomption"))] = true;
+		$TListDays[strtoupper(trim("La fête nationale"))] = true;
+		$TListDays[strtoupper(trim("Le lundi de Pentecôte"))] = true;
+		$TListDays[strtoupper(trim("Pentecôte"))] = true;
+		$TListDays[strtoupper(trim("L'Ascension"))] = true;
+		$TListDays[strtoupper(trim("Fête de la Victoire 1945"))] = true;
+		$TListDays[strtoupper(trim("La fête du Travail"))] = true;
+		$TListDays[strtoupper(trim("Le lundi de Pâques"))] = true;
+		$TListDays[strtoupper(trim("Pâques"))] = true;
+		$TListDays[strtoupper(trim("Jour de l'an"))] = true;
         
         foreach($iCal->cal['VEVENT'] as $event) {
-        
-            if($event['STATUS']=='CONFIRMED') {
+        	$label = strtoupper(trim($event['SUMMARY']));
+            if($event['STATUS']=='CONFIRMED' && !empty($TListDays[$label])) {
                 //var_dump($event);
                 $jf = new TRH_JoursFeries;
                 $jf->commentaire = $event['SUMMARY'];
