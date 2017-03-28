@@ -54,7 +54,13 @@ class TRH_JoursFeries extends TObjetStd {
     }
     
     static function estFerie(&$ATMdb, $date) {
-        global $conf;
+        global $conf, $TCacheTFerie;
+		
+		if(empty($TCacheTFerie))$TCacheTFerie=array();
+		
+		if(!empty($TCacheTFerie[$date])) return $TCacheTFerie[$date];
+		
+		
         //on récupère toutes les dates de jours fériés existant
         $sql="SELECT count(*) as 'nb'  FROM ".MAIN_DB_PREFIX."rh_absence_jours_feries
              WHERE entity IN (0,".(! empty($conf->multicompany->enabled) && ! empty($conf->multicompany->transverse_mode)?"1,":"").$conf->entity.")
@@ -65,12 +71,12 @@ class TRH_JoursFeries extends TObjetStd {
             
         //on teste si l'un d'eux est égal à celui que l'on veut créer
         if($obj->nb > 0){
-            return true;    
+            $TCacheTFerie[$date] = true;    
         }
         
-        return false;
+        $TCacheTFerie[$date] = false;
         
-        
+        return $TCacheTFerie[$date];
     }
     
     static function syncronizeFromURL(&$ATMdb, $url) {
