@@ -73,8 +73,9 @@ class TRH_JoursFeries extends TObjetStd {
         if($obj->nb > 0){
             $TCacheTFerie[$date] = true;    
         }
-        
-        $TCacheTFerie[$date] = false;
+        else {
+        	$TCacheTFerie[$date] = false;
+        }
         
         return $TCacheTFerie[$date];
     }
