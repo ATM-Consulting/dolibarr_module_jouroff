@@ -27,14 +27,14 @@
                     list($id_country, $code_country) = explode(':', $conf->global->MAIN_INFO_SOCIETE_COUNTRY);
                     
                     if($code_country=='FR') {
-                        $url='https://www.google.com/calendar/ical/fr.french%23holiday%40group.v.calendar.google.com/public/basic.ics';
+//                        $url='https://www.google.com/calendar/ical/fr.french%23holiday%40group.v.calendar.google.com/public/basic.ics';
+			  $url='https://calendar.google.com/calendar/ical/fr.french%23holiday%40group.v.calendar.google.com/public/basic.ics';
                     }
                     else{
                         $url = '';  
                     }
                     
                 }
-                
                 
                 if(!empty($conf->global->ABSENCE_SYNC_CALENDAR)) {
                     $url = $conf->global->ABSENCE_SYNC_CALENDAR;
