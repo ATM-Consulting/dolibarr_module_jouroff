@@ -143,7 +143,7 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
         )
         ,'link'=>array(
             'date_jourOff'=>'<a href="?idJour=@ID@&fk_user='.$user->id.'&action=view">@val@</a>'
-            ,'Supprimer'=>$user->rights->jouroff->myactions->ajoutJourOff?"<a onclick=\"if (window.confirm('" . $langs->trans('DoYouReallyWantDeletePublicHoliday') . "')){href='?idJour=@ID@&fk_user=".$user->id."&action=delete'};\">".img_delete()."</a>":''
+            ,'Supprimer'=>$user->rights->jouroff->myactions->ajoutJourOff?"<a onclick=\"if (window.confirm('" . $langs->trans('DoYouReallyWantDeletePublicHoliday') . "')){href='?idJour=@ID@&fk_user=".$user->id."&token=".newToken()."&action=delete'};\">".img_delete()."</a>":''
         ) 
         ,'translate'=>array(
             'Période'=>array('matin'=> $langs->trans('AbsenceMorning'),'apresmidi'=> $langs->trans('AbsenceAfternoon'),'allday'=> $langs->trans('AbsenceAllDay'))
@@ -196,6 +196,7 @@ function _fiche(&$PDOdb, $feries, $emploiTemps, $mode) {
     echo $form->hidden('idJour', $feries->getId());
     echo $form->hidden('action', 'save');
     echo $form->hidden('id', $user->id);
+    echo $form->hidden('token', newToken());
 
     
     $TBS=new TTemplateTBS();
