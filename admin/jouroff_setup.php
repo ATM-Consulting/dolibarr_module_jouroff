@@ -135,7 +135,7 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
     $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;           
     //print $page;
     $form=new TFormCore($_SERVER['PHP_SELF'],'formtranslateList','GET');
-    
+    $newToken = function_exists('newToken') ? newToken() : $_SESSION['newtoken'];
     $r->liste($PDOdb, $sql, array(
         'limit'=>array(
             'page'=>$page
@@ -143,7 +143,7 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
         )
         ,'link'=>array(
             'date_jourOff'=>'<a href="?idJour=@ID@&fk_user='.$user->id.'&action=view">@val@</a>'
-            ,'Supprimer'=>$user->rights->jouroff->myactions->ajoutJourOff?"<a onclick=\"if (window.confirm('" . $langs->trans('DoYouReallyWantDeletePublicHoliday') . "')){href='?idJour=@ID@&fk_user=".$user->id."&action=delete'};\">".img_delete()."</a>":''
+            ,'Supprimer'=>$user->rights->jouroff->myactions->ajoutJourOff?"<a onclick=\"if (window.confirm('" . $langs->trans('DoYouReallyWantDeletePublicHoliday') . "')){href='?idJour=@ID@&fk_user=".$user->id."&token=".$newToken."&action=delete'};\">".img_delete()."</a>":''
         ) 
         ,'translate'=>array(
             'Période'=>array('matin'=> $langs->trans('AbsenceMorning'),'apresmidi'=> $langs->trans('AbsenceAfternoon'),'allday'=> $langs->trans('AbsenceAllDay'))
@@ -190,12 +190,13 @@ function _liste(&$PDOdb, $feries, $emploiTemps ) {
 function _fiche(&$PDOdb, $feries, $emploiTemps, $mode) {
     global $db,$user,$idUserCompt, $idComptEnCours, $langs;
     llxHeader('', $langs->trans('Schedule'));
-    
+    $newToken = function_exists('newToken') ? newToken() : $_SESSION['newtoken'];
     $form=new TFormCore($_SERVER['PHP_SELF'],'form1','POST');
     $form->Set_typeaff($mode);
     echo $form->hidden('idJour', $feries->getId());
     echo $form->hidden('action', 'save');
     echo $form->hidden('id', $user->id);
+    echo $form->hidden('token', $newToken);
 
     
     $TBS=new TTemplateTBS();
