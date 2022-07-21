@@ -58,7 +58,7 @@ class modJouroff extends DolibarrModules
 		// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "Description of module Jouroff";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-		$this->version = '1.1';
+		$this->version = '1.1.1';
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
@@ -66,7 +66,7 @@ class modJouroff extends DolibarrModules
 		// Name of image file used for this module.
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
 		// If file is in module/img directory under name object_pictovalue.png, use this->picto='pictovalue@module'
-		$this->picto='jouroff@jouroff';
+		$this->picto='jouroff.svg@jouroff';
 
 		// Defined all module parts (triggers, login, substitutions, menus, css, etc...)
 		// for default path (eg: /jouroff/core/xxxxx) (0=disable, 1=enable)
@@ -137,7 +137,7 @@ class modJouroff extends DolibarrModules
 		// 'thirdparty'       to add a tab in third party view
 		// 'user'             to add a tab in user view
         $this->tabs = array(
-            
+
         );
 
         // Dictionaries
@@ -256,7 +256,7 @@ class modJouroff extends DolibarrModules
 		$sql = array();
 
 		$result=$this->_load_tables('/jouroff/sql/');
-		
+
 		define('INC_FROM_DOLIBARR',true);
 		dol_include_once("/jouroff/config.php");
 		dol_include_once("/jouroff/script/create-maj-base.php");
